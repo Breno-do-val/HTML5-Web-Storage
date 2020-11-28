@@ -2,6 +2,7 @@ class App {
   constructor() {
     console.log("Initialized...");
     this.bindButtonListener();
+    this.listStorageValues();
   }
 
   bindButtonListener() {
@@ -19,6 +20,21 @@ class App {
     if(keyInput.value && valueInput.value) {
       localStorage.setItem(keyInput.value, valueInput.value)
     }
+  }
+
+  listStorageValues() {
+    const storageValues = document.getElementById('storageValues');
+
+    const toHtml = key => {
+      const value = localStorage.getItem(key);
+      return `<p>${key}: ${value}</p>`;
+    };
+
+    const htmlOutput = Object.keys(localStorage)
+      .map(toHtml)
+      .join('');
+
+    storageValues.innerHTML = htmlOutput;
   }
 }
 
